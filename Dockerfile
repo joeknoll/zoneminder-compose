@@ -17,6 +17,7 @@ RUN /usr/sbin/su -s /bin/bash nobody -c "/usr/sbin/yay -S --noconfirm --norebuil
 
 RUN /usr/sbin/touch /var/log/zm.log   && /usr/sbin/chown http:http /var/log/zm.log
 RUN /usr/sbin/mkdir -p /run/fcgiwrap/ && /usr/sbin/chown http:http /run/fcgiwrap/
+
 ################### Clean-up
 #RUN /usr/sbin/pacman -Rs --noconfirm git base-devel cmake
 

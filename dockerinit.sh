@@ -4,8 +4,9 @@
 # Clear up the repeating warning:
 /usr/sbin/sed -e '/extension=zip/ s/^;*/;/' -i /etc/php/php.ini
 
-/usr/sbin/php-fpm
-/usr/sbin/zmpkg.pl start
+/usr/sbin/su -s /bin/bash http -c "/usr/sbin/zmpkg.pl start"
 /usr/sbin/su -s /bin/bash http -c "/usr/sbin/fcgiwrap -f -s unix:/run/fcgiwrap/fcgiwrap.sock &"
+/usr/sbin/php-fpm
+
 exec /usr/sbin/nginx -g "daemon off;"
 
