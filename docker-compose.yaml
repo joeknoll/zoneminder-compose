@@ -30,6 +30,9 @@ services:
       dockerfile: ./Dockerfile
       target: zm
     restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_started
     deploy:
       update_config:
         failure_action: rollback
