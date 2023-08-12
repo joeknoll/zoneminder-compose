@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
       target: zmdb
+    restart: unless-stopped
     environment:
       MARIADB_RANDOM_ROOT_PASSWORD: "yes"
       MARIADB_DATABASE: zm
