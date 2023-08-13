@@ -31,8 +31,7 @@ services:
       target: zm
     restart: unless-stopped
     depends_on:
-      mariadb:
-        condition: service_started
+      - mariadb
     deploy:
       update_config:
         failure_action: rollback
