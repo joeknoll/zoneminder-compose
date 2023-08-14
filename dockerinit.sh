@@ -6,9 +6,11 @@
 
 
 /usr/sbin/echo "Starting fcgiwrap"
-/usr/sbin/su -s /bin/bash http -c "/usr/sbin/fcgiwrap -f -s unix:/run/fcgiwrap/fcgiwrap.sock &"
+#/usr/sbin/su -s /bin/bash http -c "/usr/sbin/fcgiwrap -c 10 -s unix:/run/fcgiwrap/fcgiwrap.sock &"
+/usr/sbin/su -s /bin/bash http -c "/usr/sbin/spawn-fcgi -s /run/fcgiwrap/fcgiwrap.sock -F 10 -U http -G http -- /usr/bin/fcgiwrap" || exit 1
 /usr/sbin/echo "Starting php-fpm"
-/usr/sbin/php-fpm
+/usr/sbin/chown http:http /run/php-fpm
+/usr/sbin/su -s /bin/bash http -c "/usr/sbin/php-fpm" || exit 1
 /usr/sbin/echo "Starting nginx"
 
 

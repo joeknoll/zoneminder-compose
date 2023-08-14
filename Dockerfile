@@ -4,8 +4,8 @@ RUN /usr/sbin/pacman -Syyu --noconfirm
 RUN /usr/bin/pacman-key -u
 RUN /usr/bin/pacman-db-upgrade
 RUN /usr/sbin/pacman -S --noconfirm git base-devel cmake sudo \
-    libvncserver pcre vlc \
-    nginx fcgiwrap
+    libvncserver pcre vlc opencv-cuda\
+    nginx fcgiwrap spawn-fcgi
 RUN /usr/sbin/echo "nobody ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/nobody
 
 ################### Install AUR dependencies:
@@ -14,6 +14,7 @@ RUN /usr/bin/mkdir --mode=777 -p /.cache/go-build
 RUN /usr/sbin/su -s /bin/bash nobody -c "cd /tmp/yay/ && /usr/sbin/makepkg -s --noconfirm -i"
 RUN /usr/sbin/su -s /bin/bash nobody -c "/usr/sbin/yay -S --noconfirm --norebuild --noredownload --useask pod2man"
 RUN /usr/sbin/su -s /bin/bash nobody -c "/usr/sbin/yay -S --noconfirm --norebuild --noredownload --useask zoneminder"
+RUN /usr/sbin/su -s /bin/bash nobody -c "/usr/sbin/yay -S --noconfirm --norebuild --noredownload --useask zmeventnotification"
 
 RUN /usr/sbin/touch /var/log/zm.log   && /usr/sbin/chown http:http /var/log/zm.log
 RUN /usr/sbin/mkdir -p /run/fcgiwrap/ && /usr/sbin/chown http:http /run/fcgiwrap/
